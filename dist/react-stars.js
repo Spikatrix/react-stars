@@ -78,6 +78,11 @@ function ReactStars(props) {
         classNames = _useState14[0],
         setClassNames = _useState14[1];
 
+    var _useState15 = (0, _react.useState)(''),
+        _useState16 = _slicedToArray(_useState15, 2),
+        textClassName = _useState16[0],
+        setTextClassName = _useState16[1];
+
     function iconsUsed(config) {
         return !config.isHalf && config.emptyIcon && config.filledIcon || config.isHalf && config.emptyIcon && config.halfIcon && config.filledIcon;
     }
@@ -108,6 +113,7 @@ function ReactStars(props) {
     function addClassNames() {
         var reactStarsClass = 'react-stars';
         setClassNames(props.classNames + (' ' + reactStarsClass));
+        setTextClassName(props.textClassName);
     }
 
     function isDecimal(value) {
@@ -275,8 +281,10 @@ function ReactStars(props) {
             renderStars(),
             _react2.default.createElement(
                 'p',
-                { style: { position: 'absolute', left: '-200rem' }, role: 'status' },
-                currentValue
+                { className: textClassName, role: 'status' },
+                currentValue,
+                ' / ',
+                stars.length
             )
         )
     );
@@ -284,6 +292,7 @@ function ReactStars(props) {
 
 ReactStars.propTypes = {
     classNames: _propTypes2.default.string,
+    textClassName: _propTypes2.default.string,
     edit: _propTypes2.default.bool,
     half: _propTypes2.default.bool,
     value: _propTypes2.default.number,

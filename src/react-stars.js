@@ -38,6 +38,7 @@ function ReactStars(props) {
     const [halfStarAt, setHalfStarAt] = useState(0);
     const [halfStarHidden, setHalfStarHidden] = useState(false);
     const [classNames, setClassNames] = useState('');
+    const [textClassName, setTextClassName] = useState('');
 
     function iconsUsed(config) {
         return (
@@ -73,6 +74,7 @@ function ReactStars(props) {
     function addClassNames() {
         const reactStarsClass = 'react-stars';
         setClassNames(props.classNames + ` ${reactStarsClass}`);
+        setTextClassName(props.textClassName);
     }
 
     function isDecimal(value) {
@@ -241,8 +243,8 @@ function ReactStars(props) {
             style={parentStyles} >
             {config.isHalf && renderHalfStarStyleElement()}
             {renderStars()}
-            <p style={{ position: 'absolute', left: '-200rem' }} role='status'>
-                {currentValue}
+            <p className={textClassName} role='status'>
+                {currentValue} / {stars.length}
             </p>
         </div>
     </div>
@@ -250,6 +252,7 @@ function ReactStars(props) {
 
 ReactStars.propTypes = {
     classNames: PropTypes.string,
+    textClassName: PropTypes.string,
     edit: PropTypes.bool,
     half: PropTypes.bool,
     value: PropTypes.number,
