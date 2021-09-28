@@ -74,13 +74,14 @@ This a list of props that you can pass down to the component:
 
 | Property               | Description                                                                                                                               | Default value | type     |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- |
-| `classNames`            | Name of parent classes                                                                                                                      | `null`        | string   |
+| `className`            | Names of parent classes                                                                                                                      | `null`        | string   |
+| `textClassName`            | Names of text displayer classes                                                                                                                      | `null`        | string   |
 | `count`                | How many total stars you want                                                                                                             | 5             | number   |
 | `value`                | Set rating value                                                                                                                          | 0             | number   |
 | `char`                 | Which character you want to use as a star                                                                                                 | ★             | string   |
 | `color`               | Color of inactive star (this supports any CSS valid value)                                                                                | `gray`        | string   |
 | `activeColor`               | Color of selected or active star                                                                                                          | `#ffd700`     | string   |
-| `size`                 | Size of stars (in px)                                                                                                                     | `15px`        | string   |
+| `size`                 | Size of stars (in px)                                                                                                                     | `15`        | number   |
 | `edit`                 | Should you be able to select rating or just see rating (for reusability)                                                                  | `true`        | boolean  |
 | `isHalf`                 | Should component use half stars, if not the decimal part will be dropped otherwise normal algebra rools will apply to round to half stars | `true`        | boolean  |
 | `emptyIcon`            | Use your own elements as empty icons                                                                                                      | `null`        | element  |

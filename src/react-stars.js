@@ -37,7 +37,7 @@ function ReactStars(props) {
     const [config, setConfig] = useConfig(props);
     const [halfStarAt, setHalfStarAt] = useState(0);
     const [halfStarHidden, setHalfStarHidden] = useState(false);
-    const [classNames, setClassNames] = useState('');
+    const [className, setClassName] = useState('');
     const [textClassName, setTextClassName] = useState('');
 
     function iconsUsed(config) {
@@ -73,7 +73,7 @@ function ReactStars(props) {
 
     function addClassNames() {
         const reactStarsClass = 'react-stars';
-        setClassNames(props.classNames + ` ${reactStarsClass}`);
+        setClassName(props.className + ` ${reactStarsClass}`);
         setTextClassName(props.textClassName);
     }
 
@@ -239,7 +239,7 @@ function ReactStars(props) {
         <div tabIndex={config.a11y && config.edit ? 0 : null}
             aria-label='add rating by typing an integer from 0 to 5 or pressing arrow keys'
             onKeyDown={handleKeyDown}
-            className={classNames}
+            className={className}
             style={parentStyles} >
             {config.isHalf && renderHalfStarStyleElement()}
             {renderStars()}
@@ -251,7 +251,7 @@ function ReactStars(props) {
 }
 
 ReactStars.propTypes = {
-    classNames: PropTypes.string,
+    className: PropTypes.string,
     textClassName: PropTypes.string,
     edit: PropTypes.bool,
     half: PropTypes.bool,

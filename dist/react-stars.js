@@ -75,8 +75,8 @@ function ReactStars(props) {
 
     var _useState13 = (0, _react.useState)(''),
         _useState14 = _slicedToArray(_useState13, 2),
-        classNames = _useState14[0],
-        setClassNames = _useState14[1];
+        className = _useState14[0],
+        setClassName = _useState14[1];
 
     var _useState15 = (0, _react.useState)(''),
         _useState16 = _slicedToArray(_useState15, 2),
@@ -112,7 +112,7 @@ function ReactStars(props) {
 
     function addClassNames() {
         var reactStarsClass = 'react-stars';
-        setClassNames(props.classNames + (' ' + reactStarsClass));
+        setClassName(props.className + (' ' + reactStarsClass));
         setTextClassName(props.textClassName);
     }
 
@@ -275,7 +275,7 @@ function ReactStars(props) {
             { tabIndex: config.a11y && config.edit ? 0 : null,
                 'aria-label': 'add rating by typing an integer from 0 to 5 or pressing arrow keys',
                 onKeyDown: handleKeyDown,
-                className: classNames,
+                className: className,
                 style: parentStyles },
             config.isHalf && renderHalfStarStyleElement(),
             renderStars(),
@@ -291,7 +291,7 @@ function ReactStars(props) {
 }
 
 ReactStars.propTypes = {
-    classNames: _propTypes2.default.string,
+    className: _propTypes2.default.string,
     textClassName: _propTypes2.default.string,
     edit: _propTypes2.default.bool,
     half: _propTypes2.default.bool,
