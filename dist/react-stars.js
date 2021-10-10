@@ -144,9 +144,9 @@ function ReactStars(props) {
         var index = Number(event.currentTarget.getAttribute('data-index'));
 
         if (config.isHalf) {
-            var isAtHalf = moreThanHalf(event);
-            setHalfStarHidden(isAtHalf);
-            if (isAtHalf) index += 1;
+            var starSegment = getStarSegment(event);
+            setHalfStarHidden(starSegment != 0);
+            if (starSegment == 1) index += 1;
             setHalfStarAt(index);
         } else {
             index += 1;
@@ -164,14 +164,20 @@ function ReactStars(props) {
         }
     }
 
-    function moreThanHalf(event) {
+    function getStarSegment(event) {
         var target = event.target;
 
         var boundingClientRect = target.getBoundingClientRect();
         var mouseAt = event.clientX - boundingClientRect.left;
         mouseAt = Math.round(Math.abs(mouseAt));
 
-        return mouseAt > boundingClientRect.width / 2;
+        if (mouseAt < boundingClientRect.width / 3) {
+            return -1;
+        } else if (mouseAt > 2 * boundingClientRect.width / 3) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     function mouseLeave() {
@@ -194,11 +200,11 @@ function ReactStars(props) {
         var index = Number(event.currentTarget.getAttribute('data-index'));
         var value = void 0;
         if (config.isHalf) {
-            var isAtHalf = moreThanHalf(event);
-            setHalfStarHidden(isAtHalf);
-            if (isAtHalf) index += 1;
-            value = isAtHalf ? index : index + 0.5;
+            var starSegment = getStarSegment(event);
+            setHalfStarHidden(starSegment != 0);
+            if (starSegment == 1) index += 1;
             setHalfStarAt(index);
+            value = starSegment == 1 ? index : starSegment == 0 ? index + 0.5 : index;
         } else {
             value = index = index + 1;
         }

@@ -107,9 +107,9 @@ function ReactStars(props) {
         let index = Number(event.currentTarget.getAttribute('data-index'));
 
         if (config.isHalf) {
-            const isAtHalf = moreThanHalf(event);
-            setHalfStarHidden(isAtHalf);
-            if (isAtHalf) index += 1;
+            const starSegment = getStarSegment(event);
+            setHalfStarHidden(starSegment != 0);
+            if (starSegment == 1) index += 1;
             setHalfStarAt(index);
         }
         else {
@@ -126,13 +126,19 @@ function ReactStars(props) {
         }
     }
 
-    function moreThanHalf(event) {
+    function getStarSegment(event) {
         const { target } = event;
         const boundingClientRect = target.getBoundingClientRect();
         let mouseAt = event.clientX - boundingClientRect.left;
         mouseAt = Math.round(Math.abs(mouseAt));
 
-        return mouseAt > boundingClientRect.width / 2
+	if (mouseAt < boundingClientRect.width / 3) {
+	    return -1;
+	} else if (mouseAt > 2 * boundingClientRect.width / 3) {
+	    return 1;
+	} else {
+	    return 0;
+	}
     }
 
     function mouseLeave() {
@@ -155,11 +161,11 @@ function ReactStars(props) {
         let index = Number(event.currentTarget.getAttribute('data-index'));
         let value;
         if (config.isHalf) {
-            const isAtHalf = moreThanHalf(event);
-            setHalfStarHidden(isAtHalf);
-            if (isAtHalf) index += 1;
-            value = isAtHalf ? index : index + 0.5;
+	    const starSegment = getStarSegment(event);
+            setHalfStarHidden(starSegment != 0);
+	    if (starSegment == 1) index += 1;
             setHalfStarAt(index);
+            value = starSegment == 1 ? index : starSegment == 0 ? index + 0.5 : index;
         }
         else {
             value = index = index + 1;
@@ -205,7 +211,7 @@ function ReactStars(props) {
                 event.preventDefault();
 
                 value += (config.isHalf ? 0.5 : 1);
-            } else if ((key === "ArrowDown" || key === "ArrowLeft") && value > 0.5) {
+            } else if ((key === "ArrowDown" || key === "ArrowLeft") && value > 0) {
                 event.preventDefault();
                 value -= (config.isHalf ? 0.5 : 1);
             }
