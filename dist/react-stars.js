@@ -234,23 +234,21 @@ function ReactStars(props) {
         var value = currentValue;
 
         var keyNumber = Number(key); // e.g. "1" => 1, "ArrowUp" => NaN
-        if (keyNumber) {
-            if (Number.isInteger(keyNumber) && keyNumber > 0 && keyNumber <= config.count) {
+        if (!isNaN(keyNumber)) {
+            if (Number.isInteger(keyNumber) && keyNumber <= config.count) {
                 value = keyNumber;
             }
         } else {
             if ((key === "ArrowUp" || key === "ArrowRight") && value < config.count) {
                 event.preventDefault();
-
                 value += config.isHalf ? 0.5 : 1;
-            } else if ((key === "ArrowDown" || key === "ArrowLeft") && value > 0.5) {
+            } else if ((key === "ArrowDown" || key === "ArrowLeft") && value > 0) {
                 event.preventDefault();
                 value -= config.isHalf ? 0.5 : 1;
             }
         }
 
         updateHalfStarValues(value);
-
         currentValueUpdated(value);
     }
 

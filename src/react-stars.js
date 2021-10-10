@@ -198,10 +198,9 @@ function ReactStars(props) {
         let value = currentValue;
 
         const keyNumber = Number(key); // e.g. "1" => 1, "ArrowUp" => NaN
-        if (keyNumber) {
+        if (!isNaN(keyNumber)) {
             if (
                 Number.isInteger(keyNumber) &&
-                keyNumber > 0 &&
                 keyNumber <= config.count
             ) {
                 value = keyNumber;
@@ -209,7 +208,6 @@ function ReactStars(props) {
         } else {
             if ((key === "ArrowUp" || key === "ArrowRight") && value < config.count) {
                 event.preventDefault();
-
                 value += (config.isHalf ? 0.5 : 1);
             } else if ((key === "ArrowDown" || key === "ArrowLeft") && value > 0) {
                 event.preventDefault();
@@ -218,7 +216,6 @@ function ReactStars(props) {
         }
 
         updateHalfStarValues(value);
-
         currentValueUpdated(value);
     }
 
