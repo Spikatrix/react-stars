@@ -52,6 +52,10 @@ function ReactStars(props) {
     }
 
     useEffect(() => {
+        currentValueUpdated(props.value);
+    }, [props.value]);
+
+    useEffect(() => {
         addClassNames();
         validateInitialValue(props.value, props.count);
         setStars(getStars(props.value));

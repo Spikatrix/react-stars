@@ -92,6 +92,10 @@ function ReactStars(props) {
     }
 
     (0, _react.useEffect)(function () {
+        currentValueUpdated(props.value);
+    }, [props.value]);
+
+    (0, _react.useEffect)(function () {
         addClassNames();
         validateInitialValue(props.value, props.count);
         setStars(getStars(props.value));
