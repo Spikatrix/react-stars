@@ -52,10 +52,6 @@ function ReactStars(props) {
     }
 
     useEffect(() => {
-        currentValueUpdated(props.value);
-    }, [props.value]);
-
-    useEffect(() => {
         addClassNames();
         validateInitialValue(props.value, props.count);
         setStars(getStars(props.value));
@@ -64,7 +60,11 @@ function ReactStars(props) {
         setIsUsingIcons(iconsUsed(props));
         setHalfStarAt(Math.floor(props.value));
         setHalfStarHidden(props.isHalf && props.value % 1 < 0.5);
-    }, []);
+    }, [props, props.value, props.count, props.isHalf]);
+
+    useEffect(() => {
+        currentValueUpdated(props.value);
+    }, [props.value]);
 
     function validateInitialValue(value, count) {
         if (value < 0 || value > count) {
